@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "start": "astro dev",
+    "build": "node scraper.js && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
