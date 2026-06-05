@@ -1,11 +1,70 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import JobCard from '../components/JobCard.astro';
+import jobsData from '../data/jobs.json';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Ensure jobs is an array
+const jobs = Array.isArray(jobsData) ? jobsData : [];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="RemoteJobs - The #1 Remote Job Board">
+	<Hero />
+    
+    <main class="container">
+        <div class="list-header">
+            <h2>Latest Remote Jobs</h2>
+            <span class="job-count">{jobs.length} jobs posted</span>
+        </div>
+
+        <div class="job-list">
+            {jobs.map(job => (
+                <JobCard 
+                    title={job.title}
+                    company={job.company}
+                    category={job.category}
+                    tags={job.tags}
+                    url={job.url}
+                    date={job.date}
+                />
+            ))}
+        </div>
+    </main>
 </Layout>
+
+<style>
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+    }
+
+    .list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .list-header h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+        color: var(--text-primary);
+    }
+
+    .job-count {
+        background: var(--accent-color);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .job-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+</style>

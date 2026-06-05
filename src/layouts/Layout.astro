@@ -1,3 +1,11 @@
+---
+interface Props {
+	title?: string;
+}
+
+const { title = "Remote Jobs - Find your next opportunity" } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,18 +14,110 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 	</head>
 	<body>
+        <nav class="navbar">
+            <div class="nav-content">
+                <a href="/" class="logo">🚀 Remote<span>Jobs</span></a>
+                <div class="nav-links">
+                    <a href="#">Health insurance</a>
+                    <a href="#" class="btn-primary">Post a job</a>
+                </div>
+            </div>
+        </nav>
 		<slot />
 	</body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+<style is:global>
+	:root {
+		--bg-color: #f7f9fc;
+		--surface-color: #ffffff;
+		--text-primary: #1e293b;
+		--text-secondary: #64748b;
+		--accent-color: #3b82f6;
+		--accent-hover: #2563eb;
+		--border-color: #e2e8f0;
+        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 	}
+
+	html, body {
+		margin: 0;
+		padding: 0;
+		font-family: 'Inter', system-ui, -apple-system, sans-serif;
+		background-color: var(--bg-color);
+		color: var(--text-primary);
+        -webkit-font-smoothing: antialiased;
+	}
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .navbar {
+        background-color: var(--surface-color);
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(8px);
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        text-decoration: none;
+        color: var(--text-primary);
+        letter-spacing: -0.5px;
+    }
+
+    .logo span {
+        color: var(--accent-color);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+        color: var(--text-primary);
+    }
+
+    .btn-primary {
+        background-color: var(--accent-color);
+        color: white !important;
+        padding: 0.5rem 1.25rem;
+        border-radius: 9999px;
+        font-weight: 600 !important;
+        transition: background-color 0.2s, transform 0.1s !important;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--accent-hover);
+        transform: translateY(-1px);
+    }
 </style>

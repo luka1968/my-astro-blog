@@ -1,0 +1,202 @@
+---
+interface Props {
+    title: string;
+    company: string;
+    category: string;
+    tags: string[];
+    url: string;
+    date: string;
+}
+
+const { title, company, category, tags, url, date } = Astro.props;
+
+// Convert date to readable relative format
+const publishDate = new Date(date);
+const now = new Date();
+const diffMs = now.getTime() - publishDate.getTime();
+const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+const timeAgo = diffDays === 0 ? 'Today' : diffDays === 1 ? '1d' : `${diffDays}d`;
+
+// Generate a color based on the company name for the logo placeholder
+const colors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899'];
+const charCode = company.charCodeAt(0) || 0;
+const logoColor = colors[charCode % colors.length];
+const initials = company.substring(0, 2).toUpperCase();
+---
+
+<a href={url} target="_blank" rel="noopener noreferrer" class="job-card">
+    <div class="job-logo" style={`background-color: ${logoColor}`}>
+        {initials}
+    </div>
+    <div class="job-info">
+        <h2 class="job-title">{title}</h2>
+        <div class="job-company">
+            <strong>{company}</strong>
+            <span class="dot">•</span>
+            <span class="category">{category}</span>
+        </div>
+    </div>
+    <div class="job-meta">
+        <div class="job-tags">
+            {tags.map(tag => (
+                <span class="tag">{tag}</span>
+            ))}
+        </div>
+        <div class="job-time">
+            <span>{timeAgo}</span>
+            <button class="apply-btn">Apply</button>
+        </div>
+    </div>
+</a>
+
+<style>
+    .job-card {
+        display: flex;
+        align-items: center;
+        background: var(--surface-color);
+        padding: 1.25rem 1.5rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.2s ease-in-out;
+        box-shadow: var(--card-shadow);
+        gap: 1.5rem;
+        position: relative;
+    }
+
+    .job-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--card-shadow-hover);
+        border-color: #bfdbfe;
+    }
+
+    .job-card:active {
+        transform: translateY(0);
+    }
+
+    .job-logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+
+    .job-info {
+        flex: 1;
+        min-width: 0; /* allows text truncation */
+    }
+
+    .job-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin: 0 0 0.25rem 0;
+        color: var(--text-primary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .job-company {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .dot {
+        font-size: 0.5rem;
+        opacity: 0.5;
+    }
+
+    .category {
+        color: var(--text-secondary);
+    }
+
+    .job-meta {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .job-tags {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .tag {
+        background: var(--bg-color);
+        color: var(--text-primary);
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        border: 1px solid var(--border-color);
+    }
+
+    .job-time {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+
+    .apply-btn {
+        background: transparent;
+        border: 1px solid var(--text-primary);
+        color: var(--text-primary);
+        padding: 0.4rem 1rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: all 0.2s;
+    }
+
+    .job-card:hover .apply-btn {
+        opacity: 1;
+        transform: translateX(0);
+        background: var(--text-primary);
+        color: white;
+    }
+    
+    .job-card:hover .job-time > span {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .job-card {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .job-meta {
+            width: 100%;
+            justify-content: space-between;
+        }
+        
+        .job-tags {
+            display: none; /* hide tags on mobile to save space */
+        }
+        
+        .apply-btn {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .job-card:hover .job-time > span {
+            display: inline;
+        }
+    }
+</style>

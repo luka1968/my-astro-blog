@@ -1,5 +1,18 @@
 [
   {
+    "id": 2090943,
+    "title": "Head of Sales",
+    "company": "The Land Geek",
+    "category": "Sales",
+    "tags": [
+      "teaching",
+      "CRM",
+      "analytics"
+    ],
+    "url": "https://remotive.com/remote-jobs/sales/head-of-sales-2090943",
+    "date": "2026-06-03T20:53:10"
+  },
+  {
     "id": 1749306,
     "title": "Copywriter",
     "company": "Coalition Technologies ",
@@ -297,16 +310,5 @@
     ],
     "url": "https://remotive.com/remote-jobs/sales/inside-sales-contractor-2086540",
     "date": "2026-05-08T22:00:54"
-  },
-  {
-    "id": 1185979,
-    "title": "Freelance Writer",
-    "company": "IAPWE",
-    "category": "Writing",
-    "tags": [
-      "REST"
-    ],
-    "url": "https://remotive.com/remote-jobs/writing/freelance-writer-1185979",
-    "date": "2026-05-04T17:00:54"
   }
 ]

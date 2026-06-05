@@ -1,0 +1,145 @@
+---
+---
+<section class="hero">
+    <div class="hero-content">
+        <h1>Find your next <span>remote job</span></h1>
+        <p>Work from anywhere in the world. Join thousands of remote workers.</p>
+        
+        <div class="search-box">
+            <input type="text" placeholder="Search by job title, company, or keywords..." />
+            <button>Search</button>
+        </div>
+
+        <div class="tags">
+            <span>🔥 Trending:</span>
+            <a href="#">Software Development</a>
+            <a href="#">Customer Service</a>
+            <a href="#">Marketing</a>
+            <a href="#">Design</a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero {
+        padding: 5rem 2rem;
+        text-align: center;
+        background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+        border-bottom: 1px solid var(--border-color);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -10%;
+        width: 50%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+        transform: rotate(30deg);
+        pointer-events: none;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+        line-height: 1.2;
+    }
+
+    h1 span {
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        background-image: linear-gradient(90deg, var(--accent-color), #8b5cf6);
+    }
+
+    p {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        margin-bottom: 2.5rem;
+    }
+
+    .search-box {
+        display: flex;
+        background: var(--surface-color);
+        padding: 0.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border-color);
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        transition: box-shadow 0.3s;
+    }
+
+    .search-box:focus-within {
+        box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
+        border-color: var(--accent-color);
+    }
+
+    .search-box input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+        font-family: inherit;
+        background: transparent;
+        color: var(--text-primary);
+    }
+
+    .search-box button {
+        background: var(--text-primary);
+        color: white;
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .search-box button:hover {
+        background: black;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        align-items: center;
+        font-size: 0.9rem;
+    }
+
+    .tags span {
+        font-weight: 600;
+        color: var(--text-secondary);
+    }
+
+    .tags a {
+        color: var(--text-primary);
+        text-decoration: none;
+        background: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        border: 1px solid var(--border-color);
+        transition: all 0.2s;
+    }
+
+    .tags a:hover {
+        border-color: var(--accent-color);
+        color: var(--accent-color);
+    }
+</style>
