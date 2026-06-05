@@ -25,7 +25,8 @@ async function fetchRemoteJobs(){
             category: job.category,
             tags: job.tags ? job.tags.slice(0, 3) : [], // 最多保留 3 个标签
             url: job.url,
-            date: job.publication_date
+            date: job.publication_date,
+            description: job.description
         }));
 
         // 3. 确保 data 目录存在并保存为 JSON 文件

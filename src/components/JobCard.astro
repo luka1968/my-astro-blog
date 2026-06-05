@@ -1,14 +1,14 @@
 ---
 interface Props {
+    id: number;
     title: string;
     company: string;
     category: string;
     tags: string[];
-    url: string;
     date: string;
 }
 
-const { title, company, category, tags, url, date } = Astro.props;
+const { id, title, company, category, tags, date } = Astro.props;
 
 // Convert date to readable relative format
 const publishDate = new Date(date);
@@ -24,7 +24,7 @@ const logoColor = colors[charCode % colors.length];
 const initials = company.substring(0, 2).toUpperCase();
 ---
 
-<a href={url} target="_blank" rel="noopener noreferrer" class="job-card">
+<a href={`/job/${id}`} class="job-card">
     <div class="job-logo" style={`background-color: ${logoColor}`}>
         {initials}
     </div>

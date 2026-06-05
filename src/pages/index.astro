@@ -20,11 +20,11 @@ const jobs = Array.isArray(jobsData) ? jobsData : [];
         <div class="job-list">
             {jobs.map(job => (
                 <JobCard 
+                    id={job.id}
                     title={job.title}
                     company={job.company}
                     category={job.category}
                     tags={job.tags}
-                    url={job.url}
                     date={job.date}
                 />
             ))}

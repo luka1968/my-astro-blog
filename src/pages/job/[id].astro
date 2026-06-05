@@ -1,0 +1,165 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import jobsData from '../../data/jobs.json';
+
+export async function getStaticPaths() {
+    return jobsData.map(job => ({
+        params: { id: job.id.toString() },
+        props: { job },
+    }));
+}
+
+const { job } = Astro.props;
+---
+
+<Layout title={`${job.title} at ${job.company}`}>
+    <div class="job-container">
+        <a href="/" class="back-link">← Back to all jobs</a>
+        
+        <header class="job-header">
+            <h1 class="job-title">{job.title}</h1>
+            <div class="job-meta">
+                <span class="company">{job.company}</span>
+                <span class="dot">•</span>
+                <span class="category">{job.category}</span>
+                <span class="dot">•</span>
+                <span class="date">{new Date(job.date).toLocaleDateString()}</span>
+            </div>
+            
+            <div class="tags">
+                {job.tags.map(tag => (
+                    <span class="tag">{tag}</span>
+                ))}
+            </div>
+        </header>
+
+        <div class="job-content" set:html={job.description} />
+    </div>
+</Layout>
+
+<style>
+    .job-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-bottom: 2rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    .back-link:hover {
+        color: var(--accent-color);
+    }
+
+    .job-header {
+        background: var(--surface-color);
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+        border: 1px solid var(--border-color);
+        margin-bottom: 2rem;
+    }
+
+    .job-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin: 0 0 1rem 0;
+        line-height: 1.2;
+    }
+
+    .job-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .company {
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .dot {
+        opacity: 0.5;
+    }
+
+    .tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .tag {
+        background: var(--bg-color);
+        color: var(--text-primary);
+        padding: 0.35rem 1rem;
+        border-radius: 9999px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 1px solid var(--border-color);
+    }
+
+    .job-content {
+        background: var(--surface-color);
+        padding: 3rem;
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+        border: 1px solid var(--border-color);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #334155;
+    }
+
+    .job-content :global(h1),
+    .job-content :global(h2),
+    .job-content :global(h3),
+    .job-content :global(h4) {
+        color: var(--text-primary);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .job-content :global(a) {
+        color: var(--accent-color);
+        text-decoration: underline;
+        font-weight: 500;
+    }
+
+    .job-content :global(ul),
+    .job-content :global(ol) {
+        margin-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .job-content :global(li) {
+        margin-bottom: 0.5rem;
+    }
+
+    .job-content :global(p) {
+        margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .job-container {
+            padding: 2rem 1rem;
+        }
+
+        .job-header, .job-content {
+            padding: 1.5rem;
+        }
+
+        .job-title {
+            font-size: 1.8rem;
+        }
+    }
+</style>
